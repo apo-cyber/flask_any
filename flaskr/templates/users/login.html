@@ -1,0 +1,27 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends "layout.html" %}
+{% block title %}
+login - {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="shadow p-3 m-5 bg-body rounded">
+  <h2 class="border-bottom mb-4">Happy log in</h2>
+  <form method="POST" action="">
+    <div class="form-group">
+      {{ form.csrf_token}}
+      {{ render_field(form.email, class="form-control") }}
+      {{ render_field(form.password, class="form-control") }}
+      {{ render_field(form.remember, class="form-check-input") }}
+    </div>
+    {{ form.submit(class="btn btn-outline-info mt-3") }}
+    <small class="text-muted ms-2">
+      <a href="{{ url_for('users.reset_password') }}">Forgot Password?</a>
+    </small>
+  </form>
+</div>
+<div class="border-top pt-3">
+  <small class="text-muted">
+    Need An Account? <a class="ms-2" href="{{ url_for('users.register') }}">Sign Up Now</a>
+  </small>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends "layout.html" %}
+{% block content %}
+<div class="shadow p-3 m-5 bg-body rounded">
+  <h2 class="border-bottom mb-4">学生の乗車グループ分け問題</h2>
+  <form method="POST" action="" enctype="multipart/form-data">
+    <div class="form-group">
+      {{ form.csrf_token}}
+      {{ render_field(form.students, class="form-control") }}
+      {{ render_field(form.cars, class="form-control") }}
+    </div>
+    {{ form.submit(class="btn btn-outline-info mt-3") }}
+  </form>
+
+  {% if solution_html %}
+    <h1>最適化結果</h1>
+    <!-- 最適化結果をcsv形式でダウンロード -->
+    <form name=download action="/download" method=post enctype=multipart/form-data>
+      <input type=hidden name=solution_html value="{{ solution_html }}">
+      <p><input type=submit value=ダウンロード></p>
+    </form>
+    <!-- 最適化結果を表示 -->
+    {{ solution_html | safe }}
+  {% endif %}
+</div>
+{% endblock　%}

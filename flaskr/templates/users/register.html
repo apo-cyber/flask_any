@@ -1,0 +1,25 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends "layout.html" %}
+{% block title %}
+register - {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="shadow p-3 m-5 bg-body rounded">
+  <h2 class="border-bottom mb-4">Join Today</h2>
+  <form method="POST" action="">
+    <div class="form-group">
+      {{ form.csrf_token}}
+      {{ render_field(form.username, class="form-control") }}
+      {{ render_field(form.email, class="form-control") }}
+      {{ render_field(form.password, class="form-control") }}
+      {{ render_field(form.confirm_password, class="form-control") }}
+    </div>
+    {{ form.submit(class="btn btn-outline-info mt-3") }}
+  </form>
+</div>
+<div class="border-top pt-3">
+  <small class="text-muted">
+    Already Have An Account? <a class="ms-2" href="{{ url_for('users.login') }}">Sign In</a>
+  </small>
+</div>
+{% endblock %}
